@@ -1,6 +1,6 @@
 # Il progetto note personali e approcci.
 Partiamo con un approccio **dividi et impera**
-Ok già loro dicono di fare attenzione a come voglio sviluppare l'applicazione quindi devo fare tanta attenzione adesso per quanto riguarda **cosa fare**.
+Ok già loro dicono di fare attenzione a come voglio sviluppare l'applicazione quindi devo fare tanta attenzione adesso per quanto riguarda **cosa fare**:
 
 ## Tech stack richiesto
 * Angular v19
@@ -72,3 +72,48 @@ Quindi:
 
 
 # Approccio a Ionic appunti
+Allora se quello che dice l'ai è corretto ionic è un servizio integrato con angular solo che per sviluppare con esso nel mio caso è convenuto creare il progetto con il comando
+```bash
+ionic start nome-applicativo blank --type=angular
+```
+
+e così ci siamo tolti il problema del come ionic e angular lavorano insieme. L'idea di base è che utilizzando anche ionic abbiamo la possibilità di sviluppare anche per telefono integrando anche pezzi che potrebbero coincidire con un app per cellulare. Questo è ciò che sto capendo dell'applicativo più o meno.
+Ora iniziamo a fare la parte di sviluppo.
+**Lezione numero 1 sul campo (ripasso):** app.components.ts è il componente principale esso sarà la prima cosa che verrà utilizzata per vedere i vari componenti nel nostro applicativo è il main se possiamo dire.
+**Lezione numero 2 sul campo (ripasso):** Essendo tutti componenti standalone per utilizzare le grafiche proposte da ionic devi importarle ogni volta questo per una questione di comodità e semplicità e per gestire ogni componente in maniera indipendente. Importando i materiali/elementi corretti potremo utilizzarli all'interno dell'applicativo _Come utilizziamo i tag in html_
+
+**lezione numero 3 sul campo approfondimento dei modelli:**
+Un modello di dati, che è ciò che preserviamo nella cartella models del nostro progetto, è praticamente una struttura dati che manipoleremo nell'applicazione, molto semplicemente è una base dati che verrà utilizzata dagli altri vari elementi all'interno del progetto.
+Ha molti vantaggi quali
+* TypeScript controlla che usi i dati correttamente
+* L'IDE ti suggerisce proprietà disponibili
+* Previene errori come typo nei nomi delle proprietà
+
+è dichiarato come segue per esempio:
+```typescript
+export interface Transaction {
+  id: string;
+  amount: number;
+  description: string;
+  date: Date;
+  category: string;
+  type: 'income' | 'expense';
+}
+```
+La cosa buona di questa dichiarazione è che con questa tipologia di implementazione abbiamo creato l'oggetti **Transaction**, esso di conseguenza può essere definito in altre variabile nel modo seguente:
+```typescript
+// Sintassi corretta
+const transazione: Transaction = {
+  id: "123",
+  amount: 50.0,
+  description: "Spesa al supermercato",
+  date: new Date(),
+  category: "Alimentari",
+  type: "expense"
+};
+```
+Come puoi vedere l'oggetto viene instaziato con il suo tipo (Transaction) e con l'inizializzazione degli attributi.
+
+# Future implementazioni
+- [ ] Aggiunta rapida delle spese basandosi su delle spese quotidiane. Esempio se facessi una spesa simile a quella che ho fatto lunedì durante la settimana posso semplicemente schiacciare il bottone "Aggiunta rapida" / "fast add" per mettere la stessa spesa che ho fatto in precedenza
+- [ ] Un backend per gestire l'utenza penso serva per il login bro....
