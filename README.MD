@@ -114,6 +114,38 @@ const transazione: Transaction = {
 ```
 Come puoi vedere l'oggetto viene instaziato con il suo tipo (Transaction) e con l'inizializzazione degli attributi.
 
+**Lezione numero 4 che cos'è un observable e un BehaviourSubject**
+Perché dichiarare come attributo public una variabile con il $ alla fine? e che cos'è un observable?
+Un *observable* è un pattern fondamentale della libreria/modulo RxJS utilizzato in angular. Esso rappresenta un flusso di dati che può emettere più valori nel tempo.
+Permette di gestire eventi asincroni (HTTP, eventi utente, timer)
+I componenti possono "sottoscriversi" (cioè) per ricevere aggiornamenti. Viene definito un **Oggetto a se stante**
+Come dice il nome questo oggetto di tipo observable rimane sotto osservazione appunto. Vedilo come un canale di osservazione non come variabile rispetto ad essa che magari potrebbero avere un sol tipo di variabile, L'Observable invece rappresenta un flusso di valori che possono arrivare nel tempo
+
+Un *BehaviourSubject* è un tipo speciale di observable con caratteristiche uniche
+Richiede un valore iniziale all'avvio e memorizza sempre l'ultimo valore emesso invia immediatamente il valore corrente ai nuovi sottoscrittori e offre il metodo **getValue()** per ottenere il valore corrente sincronamente.
+Esso è modificabile nel nostro servizio e memorizza l'ultimo valore emesso.
+
+<h2><b><span style="color:red">Aggiornamento</span></b></h2>
+Ho compreso la logica corretta tra BehaviorSubject e observable che da come posso aver capito questa è una meccanica chiave all'interno di angular, l'idea è che innanzitutto BehaviorSubject è un oggetto intelligente che **può** lavorare con  gli observable per avvisare tutti gli altri nel caso venga modificato. 
+
+
+In parole povere questo elemento angular ci permette di rappresenta un flusso di dati -> esso gestisce eventi asincroni -> si può sottoscrivere per ricevere aggiornamenti.
+
+Il $ è una convenzione per indicare che una variabile è appunto un observable.
+
+
+
+**Lezione numero 5 Connessione tra servizio e componente**
+Il componente dashboard come utilizza un servizio, e qual'è lo scopo di un servizio in angular?
+I servizi servono a fornire funzionalità condivise in tutta l'app
+
+centralizzano la gestione dati e della logica
+separano la logica business dalla UI
+facilitano il riutilizzo di codice
+viene inniettatato all'interno dei componenti per gestire le sue capacità, In più ho notato che lavora in simbiosi con il modello definito nella cartella modelli visto che praticamente serve a gestire i tipi di pagamenti e i pagamenti stessi
+
+**Lezione numero 6 (ripasso) ngIf come funziona nell'html del componente dashboard?**
+
 # Future implementazioni
 - [ ] Aggiunta rapida delle spese basandosi su delle spese quotidiane. Esempio se facessi una spesa simile a quella che ho fatto lunedì durante la settimana posso semplicemente schiacciare il bottone "Aggiunta rapida" / "fast add" per mettere la stessa spesa che ho fatto in precedenza
-- [ ] Un backend per gestire l'utenza penso serva per il login bro....
+- [ ] Un backend per gestire l'utenza penso serva per il login bro.... Consigliato l'utilizzo di supabase per il backend

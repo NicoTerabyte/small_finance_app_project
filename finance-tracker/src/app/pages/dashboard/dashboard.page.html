@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>dashboard</ion-title>
+    <ion-title>Saldo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Saldo attuale</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h1 *ngIf="(transactions$ | async) as transactions">
+        {{ calculateBalance(transactions) | currency:'EUR':'symbol':'1.2-2' }}
+      </h1>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Transazioni recenti</ion-card-title>
+    </ion-card-header>
+    <ion-list *ngIf="(transactions$ | async) as transactions">
+      <ion-item *ngFor="let transaction of transactions.slice(-3).reverse()">
+        <ion-label>
+          <h2>{{ transaction.description }}</h2>
+          <p>{{ transaction.category }}</p>
+          <p>{{ transaction.date | date }}</p>
+        </ion-label>
+        <ion-badge slot="end" [color]="transaction.type === 'income' ? 'success' : 'danger'">
+          {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount | currency:'EUR':'symbol':'1.2-2' }}
+        </ion-badge>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>
