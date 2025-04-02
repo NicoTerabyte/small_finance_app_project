@@ -126,7 +126,9 @@ Richiede un valore iniziale all'avvio e memorizza sempre l'ultimo valore emesso 
 Esso è modificabile nel nostro servizio e memorizza l'ultimo valore emesso.
 
 ## <b><span style="color:red">Aggiornamento</span></b>
-Ho compreso la logica corretta tra BehaviorSubject e observable che da come posso aver capito questa è una meccanica chiave all'interno di angular, l'idea è che innanzitutto BehaviorSubject è un oggetto intelligente che **può** lavorare con  gli observable per avvisare tutti gli altri nel caso venga modificato. A differenza di una lista normale non serve controllare in continuazione il contenuto di questo tipo di oggetto appunto perché, rispetto ad una lista normale un BehaviorSubject può essere messo **sotto osservazione** di conseguenza ogni suo cambiamento viene annunciato agli altri 
+Ho compreso la logica corretta tra BehaviorSubject e observable che da come posso aver capito questa è una meccanica chiave all'interno di angular, l'idea è che innanzitutto BehaviorSubject è un oggetto intelligente che **può** lavorare con  gli observable per avvisare tutti gli altri nel caso venga modificato. A differenza di una lista normale non serve controllare in continuazione il contenuto di questo tipo di oggetto appunto perché, rispetto ad una lista normale un BehaviorSubject può essere messo **sotto osservazione** di conseguenza ogni suo cambiamento viene annunciato agli altri.
+
+Invece il behaviorSubject è ubn'evoluzione dell'observable nel cuore, praticamete ha più feature le quali gli permettono non solo di annunciare i cambiamenti ma anche di cambiare e dire quali valori ci sono al suo interno e vengono anche annunciati grazie al metodo next()
 
 
 In parole povere questo elemento angular ci permette di rappresenta un flusso di dati -> esso gestisce eventi asincroni -> si può sottoscrivere per ricevere aggiornamenti.
@@ -149,3 +151,14 @@ viene inniettatato all'interno dei componenti per gestire le sue capacità, In p
 # Future implementazioni
 - [ ] Aggiunta rapida delle spese basandosi su delle spese quotidiane. Esempio se facessi una spesa simile a quella che ho fatto lunedì durante la settimana posso semplicemente schiacciare il bottone "Aggiunta rapida" / "fast add" per mettere la stessa spesa che ho fatto in precedenza
 - [ ] Un backend per gestire l'utenza penso serva per il login bro.... Consigliato l'utilizzo di supabase per il backend
+
+# Accortezze e studi per il futuro
+
+<input disabled="" type="checkbox"> Pipe async e gestione sottoscrizioni: Come | async gestisce automaticamente lifecycle e memory leak
+<input disabled="" type="checkbox"> Cicli di vita dei componenti: Come funzionano ngOnInit, ngOnDestroy e altri lifecycle hooks
+<input disabled="" type="checkbox"> Change Detection: Come Angular rileva e propaga i cambiamenti nell'UI
+<input disabled="" type="checkbox"> RxJS Operators: Operatori per trasformare/filtrare flussi di dati (map, filter, switchMap, etc.)
+<input disabled="" type="checkbox"> Reactive Forms: Forms avanzate con validazioni e controlli dinamici
+<input disabled="" type="checkbox"> Pattern di immutabilità: Perché usare [...array] e {...object} invece di modifiche dirette
+<input disabled="" type="checkbox"> Aggiunta rapida delle spese: Basata su spese precedenti simili
+

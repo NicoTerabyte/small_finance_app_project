@@ -1,13 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>transaction-list</ion-title>
+    <ion-title>Lista Transazioni</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">transaction-list</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h2>Test Interattività</h2>
+
+  <ion-button expand="block" (click)="testButton()">
+    Premi Questo Bottone di Test
+  </ion-button>
+
+  <div *ngIf="buttonClicked" style="margin-top: 20px; padding: 10px; background-color: #e0ffe0; border-radius: 5px;">
+    Hai premuto il bottone! L'interattività funziona!
+  </div>
 </ion-content>

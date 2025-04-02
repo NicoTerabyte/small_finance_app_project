@@ -1,31 +1,26 @@
 <ion-app>
-  <ion-tabs>
+  <ion-content style="--overflow: auto; height: calc(100% - 56px);">
     <ion-router-outlet></ion-router-outlet>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="dashboard">
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Dashboard</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="add-transaction">
-        <ion-icon name="add-circle"></ion-icon>
-        <ion-label>Aggiungi</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="transaction-list">
-        <ion-icon name="list"></ion-icon>
-        <ion-label>Transazioni</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="analytics">
-        <ion-icon name="analytics"></ion-icon>
-        <ion-label>Analisi</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="settings">
-        <ion-icon name="settings"></ion-icon>
-        <ion-label>Impostazioni</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons style="display: flex; justify-content: space-around;">
+        <ion-button routerLink="/dashboard" routerDirection="root">
+          <ion-icon slot="icon-only" name="home"></ion-icon>
+        </ion-button>
+        <ion-button routerLink="/add-transaction" routerDirection="forward">
+          <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+        </ion-button>
+        <ion-button routerLink="/transaction-list" routerDirection="forward">
+          <ion-icon slot="icon-only" name="list"></ion-icon>
+        </ion-button>
+        <ion-button routerLink="/analytics" routerDirection="forward">
+          <ion-icon slot="icon-only" name="analytics"></ion-icon>
+        </ion-button>
+        <ion-button routerLink="/settings" routerDirection="forward">
+          <ion-icon slot="icon-only" name="settings"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
 </ion-app>

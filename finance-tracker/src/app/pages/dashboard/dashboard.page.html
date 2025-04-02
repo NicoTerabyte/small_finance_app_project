@@ -1,10 +1,11 @@
+<!-- filepath: /home/lnicoter/Projects/angular_stagista_lnicoter/finance-tracker/src/app/pages/dashboard/dashboard.page.html -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>Saldo</ion-title>
+    <ion-title>Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Saldo attuale</ion-card-title>
@@ -25,10 +26,9 @@
         <ion-label>
           <h2>{{ transaction.description }}</h2>
           <p>{{ transaction.category }}</p>
-          <p>{{ transaction.date | date }}</p>
         </ion-label>
         <ion-badge slot="end" [color]="transaction.type === 'income' ? 'success' : 'danger'">
-          {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount | currency:'EUR':'symbol':'1.2-2' }}
+          {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount | currency:'EUR' }}
         </ion-badge>
       </ion-item>
     </ion-list>

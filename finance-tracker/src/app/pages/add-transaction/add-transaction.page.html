@@ -1,13 +1,62 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>add-transaction</ion-title>
+    <ion-title>Aggiungi Transazione</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">add-transaction</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-select aria-label="Tipo" [(ngModel)]="transaction.type">
+          <ion-select-option value="expense">Spesa</ion-select-option>
+          <ion-select-option value="income">Entrata</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          label="Importo"
+          type="number"
+          [(ngModel)]="transaction.amount"
+          min="0"
+          step="0.01"
+          placeholder="0.00">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          label="Descrizione"
+          [(ngModel)]="transaction.description"
+          placeholder="Descrivi la transazione">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-select
+          label="Categoria"
+          [(ngModel)]="transaction.category"
+          placeholder="Seleziona una categoria">
+          <ion-select-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="date"
+          label="Data"
+          [(ngModel)]="transaction.date">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" (click)="addTransaction()" [disabled]="!isValidTransaction()">
+        Salva Transazione
+      </ion-button>
+    </div>
+  </ion-card>
 </ion-content>
