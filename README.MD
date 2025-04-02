@@ -125,8 +125,8 @@ Un *BehaviourSubject* è un tipo speciale di observable con caratteristiche unic
 Richiede un valore iniziale all'avvio e memorizza sempre l'ultimo valore emesso invia immediatamente il valore corrente ai nuovi sottoscrittori e offre il metodo **getValue()** per ottenere il valore corrente sincronamente.
 Esso è modificabile nel nostro servizio e memorizza l'ultimo valore emesso.
 
-<h2><b><span style="color:red">Aggiornamento</span></b></h2>
-Ho compreso la logica corretta tra BehaviorSubject e observable che da come posso aver capito questa è una meccanica chiave all'interno di angular, l'idea è che innanzitutto BehaviorSubject è un oggetto intelligente che **può** lavorare con  gli observable per avvisare tutti gli altri nel caso venga modificato. 
+## <b><span style="color:red">Aggiornamento</span></b>
+Ho compreso la logica corretta tra BehaviorSubject e observable che da come posso aver capito questa è una meccanica chiave all'interno di angular, l'idea è che innanzitutto BehaviorSubject è un oggetto intelligente che **può** lavorare con  gli observable per avvisare tutti gli altri nel caso venga modificato. A differenza di una lista normale non serve controllare in continuazione il contenuto di questo tipo di oggetto appunto perché, rispetto ad una lista normale un BehaviorSubject può essere messo **sotto osservazione** di conseguenza ogni suo cambiamento viene annunciato agli altri 
 
 
 In parole povere questo elemento angular ci permette di rappresenta un flusso di dati -> esso gestisce eventi asincroni -> si può sottoscrivere per ricevere aggiornamenti.
