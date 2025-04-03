@@ -2,12 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,
-		 IonCardTitle, IonCardContent, IonItem, IonLabel,
-		 IonSegment, IonSegmentButton } from '@ionic/angular/standalone';
+		IonCardTitle, IonCardContent, IonItem, IonLabel, IonChip,
+		IonSegment, IonSegmentButton, IonIcon } from '@ionic/angular/standalone';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../models/transaction.model';
 import { Observable, map } from 'rxjs';
 import Chart from 'chart.js/auto';
+import { addIcons } from 'ionicons';
+import { closeCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-analytics',
@@ -15,31 +17,38 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./analytics.page.scss'],
   standalone: true,
   imports: [
-	CommonModule, FormsModule, DatePipe,
+	CommonModule, FormsModule,
 	IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,
-	IonCardTitle, IonCardContent, IonItem, IonLabel,
-	IonSegment, IonSegmentButton
+	IonCardTitle, IonCardContent, IonLabel,
+	IonSegment, IonSegmentButton, IonChip,
+	IonIcon
   ]
 })
 export class AnalyticsPage implements OnInit, AfterViewInit {
-  @ViewChild('balanceCanvas') balanceCanvas!: ElementRef;
-  @ViewChild('comparisonCanvas') comparisonCanvas!: ElementRef;
+	@ViewChild('balanceCanvas') balanceCanvas!: ElementRef;
+	@ViewChild('comparisonCanvas') comparisonCanvas!: ElementRef;
 
-  transactionTypeFilter: 'all' | 'income' | 'expense' = 'all';
-  transactions$: Observable<Transaction[]>;
-  selectedPeriod: 'week' | 'month' | 'year' = 'month';
-  comparisonResult: { isBetter: boolean; percentChange: number } = { isBetter: true, percentChange: 0 };
+	transactionTypeFilter: 'all' | 'income' | 'expense' | null = null;
+	transactions$: Observable<Transaction[]>;
+	selectedPeriod: 'week' | 'month' | 'year' = 'month';
+	comparisonResult: { isBetter: boolean; percentChange: number } = { isBetter: true, percentChange: 0 };
 
-  private balanceChart!: Chart;
-  private comparisonChart!: Chart;
+	selectedPeriodSelected: boolean = false;
+	typeSelected: boolean = false;
+
+	private balanceChart!: Chart;
+	private comparisonChart!: Chart;
 
   constructor(private transactionService: TransactionService) {
-	this.transactions$ = this.transactionService.transactions$;
-  }
+		this.transactions$ = this.transactionService.transactions$;
+		addIcons({ closeCircle });
+	}
 
   ngOnInit() {
 	// Inizializzazione base
-  }
+		this.selectedPeriodSelected = false;
+		this.typeSelected = false;
+	}
 
   ngAfterViewInit() {
 	// Inizializza i grafici dopo che la vista è pronta
@@ -47,10 +56,11 @@ export class AnalyticsPage implements OnInit, AfterViewInit {
 	this.updateAnalytics();
 	}
 
-  periodChanged(event: any) {
-	this.selectedPeriod = event.detail.value;
-	this.updateAnalytics();
-  }
+	periodChanged(event: any) {
+		this.selectedPeriod = event.detail.value;
+		this.selectedPeriodSelected = true;
+		this.updateAnalytics();
+	}
 
   private createCharts() {
 	// Crea il grafico del bilancio
@@ -102,7 +112,23 @@ export class AnalyticsPage implements OnInit, AfterViewInit {
 
 	typeFilterChanged(event: any) {
 		this.transactionTypeFilter = event.detail.value;
+		this.typeSelected = true;  // Imposta a true per nascondere il selettore
 		this.updateAnalytics();
+	}
+
+	resetTypeFilter() {
+		this.typeSelected = false;
+		// this.transactionTypeFilter = 'all';
+		// this.updateAnalytics();
+	}
+
+	getTypeLabel(): string {
+		switch(this.transactionTypeFilter) {
+			case 'income': return 'Entrate';
+			case 'expense': return 'Uscite';
+			case 'all': return 'Tutte';
+			default: return 'Seleziona tipo';  // Caso per null
+		}
 	}
 
 	calculateComparison(current: { income: number, expense: number, balance: number },
@@ -142,9 +168,9 @@ export class AnalyticsPage implements OnInit, AfterViewInit {
   }
 
 	processTransactionsData(transactions: Transaction[]) {
-		// Applica il filtro per tipo se necessario
+	// Applica il filtro per tipo se necessario
 		let filteredTransactions = [...transactions];
-		if (this.transactionTypeFilter !== 'all') {
+			if (this.transactionTypeFilter && this.transactionTypeFilter !== 'all') {
 			filteredTransactions = filteredTransactions.filter(
 				t => t.type === this.transactionTypeFilter
 			);

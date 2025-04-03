@@ -1,0 +1,13 @@
+.type-filter-segment {
+  --background: #b0a8a8;  // Grigio più scuro per migliore contrasto
+  --indicator-color: #000000;
+  --color: black;       // Colore testo più scuro quando non selezionato
+  --color-checked: #1a73e8; // Colore testo più visibile quando selezionato
+  margin-top: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); // Leggera ombra per più profondità
+}
+
+ion-chip {
+  margin-left: 8px;
+}

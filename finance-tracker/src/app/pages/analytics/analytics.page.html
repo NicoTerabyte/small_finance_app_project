@@ -6,49 +6,49 @@
 
 <ion-content class="ion-padding">
   <!-- Selettore di periodo -->
-  <ion-segment (ionChange)="periodChanged($event)" [value]="selectedPeriod">
-    <ion-segment-button value="week">
-      <ion-label>Settimana</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="month">
-      <ion-label>Mese</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="year">
-      <ion-label>Anno</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-
-  <!-- Nuovo selettore di tipo transazione -->
-  <ion-segment (ionChange)="typeFilterChanged($event)" [value]="transactionTypeFilter" class="ion-margin-top">
-    <ion-segment-button value="all">
-      <ion-label>Tutte</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="income">
-      <ion-label>Entrate</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="expense">
-      <ion-label>Uscite</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-
-  <!-- Messagio di confronto -->
-  <ion-card *ngIf="comparisonResult">
+  <ion-card>
     <ion-card-content>
-      <div [ngStyle]="{'color': comparisonResult.isBetter ? 'green' : 'red', 'font-weight': 'bold', 'text-align': 'center'}">
-        <h2>
-          <span *ngIf="comparisonResult.isBetter">
-            Ottimo! Stai risparmiando più del periodo precedente.
-          </span>
-          <span *ngIf="!comparisonResult.isBetter">
-            Attenzione! Stai spendendo più del periodo precedente.
-          </span>
-        </h2>
-        <p>Variazione: {{ comparisonResult.percentChange | number:'1.0-1' }}%</p>
+      <ion-segment (ionChange)="periodChanged($event)" [value]="selectedPeriod">
+        <ion-segment-button value="week">
+          <ion-label>Settimana</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="month">
+          <ion-label>Mese</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="year">
+          <ion-label>Anno</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div *ngIf="selectedPeriodSelected && !typeSelected" class="ion-text-center ion-padding-top">
+        <p>Seleziona un tipo di transazione da visualizzare</p>
+      </div>
+
+      <ion-segment *ngIf="selectedPeriodSelected && !typeSelected"
+      (ionChange)="typeFilterChanged($event)"
+      [value]="transactionTypeFilter || null"
+      class="ion-margin-top type-filter-segment">
+        <ion-segment-button value="all">
+          <ion-label>Tutte</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="income">
+          <ion-label>Entrate</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="expense">
+          <ion-label>Uscite</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+      <!-- Visualizzazione compatta dopo la selezione del tipo -->
+      <div *ngIf="selectedPeriodSelected && typeSelected" class="ion-padding-horizontal ion-margin-top">
+      <ion-chip color="primary" (click)="resetTypeFilter()">
+      <ion-label>{{ getTypeLabel() }}</ion-label>
+      <ion-icon name="close-circle"></ion-icon>
+      </ion-chip>
       </div>
     </ion-card-content>
   </ion-card>
 
-  <!-- Resto dell'HTML invariato -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Andamento del saldo</ion-card-title>
