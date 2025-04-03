@@ -1,17 +1,62 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Lista Transazioni</ion-title>
+    <ion-title>Storico Transazioni</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h2>Test Interattività</h2>
+<ion-content class="ion-padding">
+  <!-- Filtri -->
+  <ion-card>
+    <div class="ion-padding-vertical">
+      <ion-segment (ionChange)="segmentChanged($event)" [value]="filterType">
+        <ion-segment-button value="all">
+          <ion-label>Tutte</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="expense">
+          <ion-label>Spese</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="income">
+          <ion-label>Entrate</ion-label>
+        </ion-segment-button>
+      </ion-segment>
 
-  <ion-button expand="block" (click)="testButton()">
-    Premi Questo Bottone di Test
-  </ion-button>
+      <div class="ion-padding-horizontal ion-margin-top ion-text-end">
+        <ion-button fill="clear" size="small" (click)="toggleSortDirection()">
+          {{ sortDirection === 'asc' ? 'Crescente' : 'Decrescente' }}
+          <ion-icon slot="end" name="swap-vertical"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-card>
 
-  <div *ngIf="buttonClicked" style="margin-top: 20px; padding: 10px; background-color: #e0ffe0; border-radius: 5px;">
-    Hai premuto il bottone! L'interattività funziona!
-  </div>
+  <!-- Messaggio quando non ci sono transazioni -->
+  <ion-card *ngIf="(filteredTransactions$ | async)?.length === 0">
+    <ion-card-header>
+      <ion-card-title>Nessuna transazione</ion-card-title>
+    </ion-card-header>
+    <div class="ion-padding">
+      {{ filterType !== 'all' ? 'Nessuna transazione corrisponde ai filtri selezionati.' : 'Aggiungi la tua prima transazione dalla pagina "Aggiungi"' }}
+    </div>
+  </ion-card>
+
+  <!-- Lista delle transazioni filtrate -->
+  <ion-list *ngIf="(filteredTransactions$ | async) as transactions">
+    <ion-item-sliding *ngFor="let transaction of transactions">
+      <ion-item>
+        <ion-label>
+          <h2>{{ transaction.description }}</h2>
+          <p>{{ transaction.category }} • {{ formatDate(transaction.date) }}</p>
+        </ion-label>
+        <ion-badge slot="end" [color]="transaction.type === 'income' ? 'success' : 'danger'">
+          {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount | currency:'EUR' }}
+        </ion-badge>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteTransaction(transaction.id)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

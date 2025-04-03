@@ -1,13 +1,69 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>analytics</ion-title>
+    <ion-title>Analisi Finanziaria</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">analytics</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- Selettore di periodo -->
+  <ion-segment (ionChange)="periodChanged($event)" [value]="selectedPeriod">
+    <ion-segment-button value="week">
+      <ion-label>Settimana</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="month">
+      <ion-label>Mese</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="year">
+      <ion-label>Anno</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Nuovo selettore di tipo transazione -->
+  <ion-segment (ionChange)="typeFilterChanged($event)" [value]="transactionTypeFilter" class="ion-margin-top">
+    <ion-segment-button value="all">
+      <ion-label>Tutte</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="income">
+      <ion-label>Entrate</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="expense">
+      <ion-label>Uscite</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Messagio di confronto -->
+  <ion-card *ngIf="comparisonResult">
+    <ion-card-content>
+      <div [ngStyle]="{'color': comparisonResult.isBetter ? 'green' : 'red', 'font-weight': 'bold', 'text-align': 'center'}">
+        <h2>
+          <span *ngIf="comparisonResult.isBetter">
+            Ottimo! Stai risparmiando più del periodo precedente.
+          </span>
+          <span *ngIf="!comparisonResult.isBetter">
+            Attenzione! Stai spendendo più del periodo precedente.
+          </span>
+        </h2>
+        <p>Variazione: {{ comparisonResult.percentChange | number:'1.0-1' }}%</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Resto dell'HTML invariato -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Andamento del saldo</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #balanceCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Entrate vs Spese</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #comparisonCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
