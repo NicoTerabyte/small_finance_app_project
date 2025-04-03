@@ -154,11 +154,11 @@ viene inniettatato all'interno dei componenti per gestire le sue capacità, In p
 
 # Accortezze e studi per il futuro
 
-<input disabled="" type="checkbox"> Pipe async e gestione sottoscrizioni: Come | async gestisce automaticamente lifecycle e memory leak
-<input disabled="" type="checkbox"> Cicli di vita dei componenti: Come funzionano ngOnInit, ngOnDestroy e altri lifecycle hooks
-<input disabled="" type="checkbox"> Change Detection: Come Angular rileva e propaga i cambiamenti nell'UI
-<input disabled="" type="checkbox"> RxJS Operators: Operatori per trasformare/filtrare flussi di dati (map, filter, switchMap, etc.)
-<input disabled="" type="checkbox"> Reactive Forms: Forms avanzate con validazioni e controlli dinamici
-<input disabled="" type="checkbox"> Pattern di immutabilità: Perché usare [...array] e {...object} invece di modifiche dirette
-<input disabled="" type="checkbox"> Aggiunta rapida delle spese: Basata su spese precedenti simili
+- [ ] Pipe async e gestione sottoscrizioni: Come | async gestisce automaticamente lifecycle e memory leak
+- [ ] Cicli di vita dei componenti: Come funzionano ngOnInit, ngOnDestroy e altri lifecycle hooks
+- [ ] Change Detection: Come Angular rileva e propaga i cambiamenti nell'UI
+- [ ] RxJS Operators: Operatori per trasformare/filtrare flussi di dati (map, filter, switchMap, etc.)
+- [ ] Reactive Forms: Forms avanzate con validazioni e controlli dinamici
+- [ ] Pattern di immutabilità: Perché usare [...array] e {...object} invece di modifiche dirette
+- [ ] Aggiunta rapida delle spese: Basata su spese precedenti simili
 
