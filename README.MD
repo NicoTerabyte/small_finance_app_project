@@ -80,7 +80,10 @@ ionic start nome-applicativo blank --type=angular
 e così ci siamo tolti il problema del come ionic e angular lavorano insieme. L'idea di base è che utilizzando anche ionic abbiamo la possibilità di sviluppare anche per telefono integrando anche pezzi che potrebbero coincidire con un app per cellulare. Questo è ciò che sto capendo dell'applicativo più o meno.
 Ora iniziamo a fare la parte di sviluppo.
 **Lezione numero 1 sul campo (ripasso):** app.components.ts è il componente principale esso sarà la prima cosa che verrà utilizzata per vedere i vari componenti nel nostro applicativo è il main se possiamo dire.
+<br>
+
 **Lezione numero 2 sul campo (ripasso):** Essendo tutti componenti standalone per utilizzare le grafiche proposte da ionic devi importarle ogni volta questo per una questione di comodità e semplicità e per gestire ogni componente in maniera indipendente. Importando i materiali/elementi corretti potremo utilizzarli all'interno dell'applicativo _Come utilizziamo i tag in html_
+<br>
 
 **lezione numero 3 sul campo approfondimento dei modelli:**
 Un modello di dati, che è ciò che preserviamo nella cartella models del nostro progetto, è praticamente una struttura dati che manipoleremo nell'applicazione, molto semplicemente è una base dati che verrà utilizzata dagli altri vari elementi all'interno del progetto.
@@ -113,6 +116,7 @@ const transazione: Transaction = {
 };
 ```
 Come puoi vedere l'oggetto viene instaziato con il suo tipo (Transaction) e con l'inizializzazione degli attributi.
+<br>
 
 **Lezione numero 4 che cos'è un observable e un BehaviourSubject**
 Perché dichiarare come attributo public una variabile con il $ alla fine? e che cos'è un observable?
@@ -134,6 +138,7 @@ Invece il behaviorSubject è ubn'evoluzione dell'observable nel cuore, praticame
 In parole povere questo elemento angular ci permette di rappresenta un flusso di dati -> esso gestisce eventi asincroni -> si può sottoscrivere per ricevere aggiornamenti.
 
 Il $ è una convenzione per indicare che una variabile è appunto un observable.
+<br>
 
 
 
@@ -145,7 +150,7 @@ centralizzano la gestione dati e della logica
 separano la logica business dalla UI
 facilitano il riutilizzo di codice
 viene inniettatato all'interno dei componenti per gestire le sue capacità, In più ho notato che lavora in simbiosi con il modello definito nella cartella modelli visto che praticamente serve a gestire i tipi di pagamenti e i pagamenti stessi
-
+<br>
 **Lezione numero 6 (ripasso) ngIf come funziona nell'html del componente dashboard?**
 
 # Future implementazioni
