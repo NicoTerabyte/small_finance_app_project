@@ -79,6 +79,8 @@ ionic start nome-applicativo blank --type=angular
 
 e così ci siamo tolti il problema del come ionic e angular lavorano insieme. L'idea di base è che utilizzando anche ionic abbiamo la possibilità di sviluppare anche per telefono integrando anche pezzi che potrebbero coincidire con un app per cellulare. Questo è ciò che sto capendo dell'applicativo più o meno.
 Ora iniziamo a fare la parte di sviluppo.
+<br>
+
 **Lezione numero 1 sul campo (ripasso):** app.components.ts è il componente principale esso sarà la prima cosa che verrà utilizzata per vedere i vari componenti nel nostro applicativo è il main se possiamo dire.
 <br>
 
