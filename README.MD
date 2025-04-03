@@ -71,7 +71,7 @@ Quindi:
 
 
 
-# Approccio a Ionic appunti
+# Approccio a Ionic appunti (sezione apprendimento)
 Allora se quello che dice l'ai è corretto ionic è un servizio integrato con angular solo che per sviluppare con esso nel mio caso è convenuto creare il progetto con il comando
 ```bash
 ionic start nome-applicativo blank --type=angular
@@ -155,6 +155,14 @@ viene inniettatato all'interno dei componenti per gestire le sue capacità, In p
 <br>
 **Lezione numero 6 (ripasso) ngIf come funziona nell'html del componente dashboard?**
 
+# Come funziona l'applicativo
+Opzionale(aggiungi un capacitor)
+
+Aggiungere switch per selezione delle spese (ionic elements).
+
+
+## Importante!
+abbiamo utilizzato npm install chart.js per gestire la parte del grafico per analytics
 # Future implementazioni
 - [ ] Aggiunta rapida delle spese basandosi su delle spese quotidiane. Esempio se facessi una spesa simile a quella che ho fatto lunedì durante la settimana posso semplicemente schiacciare il bottone "Aggiunta rapida" / "fast add" per mettere la stessa spesa che ho fatto in precedenza
 - [ ] Un backend per gestire l'utenza penso serva per il login bro.... Consigliato l'utilizzo di supabase per il backend
@@ -168,4 +176,7 @@ viene inniettatato all'interno dei componenti per gestire le sue capacità, In p
 - [ ] Reactive Forms: Forms avanzate con validazioni e controlli dinamici
 - [ ] Pattern di immutabilità: Perché usare [...array] e {...object} invece di modifiche dirette
 - [ ] Aggiunta rapida delle spese: Basata su spese precedenti simili
+
+
+
 
