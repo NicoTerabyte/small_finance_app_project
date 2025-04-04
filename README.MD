@@ -142,6 +142,7 @@ In parole povere questo elemento angular ci permette di rappresenta un flusso di
 Il $ è una convenzione per indicare che una variabile è appunto un observable.
 <br>
 
+test
 
 
 **Lezione numero 5 Connessione tra servizio e componente**
