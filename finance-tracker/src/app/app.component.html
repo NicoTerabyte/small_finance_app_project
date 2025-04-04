@@ -2,7 +2,7 @@
   <ion-content style="--overflow: auto; height: calc(100% - 56px);">
     <ion-router-outlet></ion-router-outlet>
   </ion-content>
-  <ion-footer>
+  <ion-footer *ngIf="isLoggedIn$ | async">
     <ion-toolbar>
       <ion-buttons style="display: flex; justify-content: space-around;">
         <ion-button routerLink="/transaction-list" routerDirection="forward">

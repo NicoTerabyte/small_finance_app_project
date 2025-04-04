@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isSignUp ? 'Registrazione' : 'Accedi' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ isSignUp ? 'Crea Account' : 'Accedi' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="handleAuth()">
+        <ion-item>
+          <ion-input
+            label="Email"
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            required
+            placeholder="La tua email">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="Password"
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+            placeholder="La tua password">
+          </ion-input>
+        </ion-item>
+
+        <div *ngIf="errorMessage" class="ion-text-center ion-padding-vertical">
+          <ion-text color="danger">{{ errorMessage }}</ion-text>
+        </div>
+
+        <div class="ion-padding-vertical">
+          <ion-button expand="block" type="submit" [disabled]="isLoading">
+            <ion-spinner *ngIf="isLoading" name="dots" class="ion-margin-end"></ion-spinner>
+            {{ isSignUp ? 'Registrati' : 'Accedi' }}
+          </ion-button>
+        </div>
+      </form>
+
+      <div class="ion-text-center ion-padding-top">
+        <ion-button fill="clear" (click)="toggleAuthMode()">
+          {{ isSignUp ? 'Hai già un account? Accedi' : 'Nuovo utente? Registrati' }}
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
