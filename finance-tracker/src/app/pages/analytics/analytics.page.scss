@@ -1,13 +1,89 @@
-.type-filter-segment {
-  --background: #b0a8a8;  // Grigio più scuro per migliore contrasto
-  --indicator-color: #000000;
-  --color: black;       // Colore testo più scuro quando non selezionato
-  --color-checked: #1a73e8; // Colore testo più visibile quando selezionato
-  margin-top: 16px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1); // Leggera ombra per più profondità
+// Stile per il container degli switch temporali - layout orizzontale
+.switch-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+  overflow-x: auto;  // Per dispositivi molto piccoli
+
+  // Stile per gli elementi switch
+  .switch-item {
+    flex: 1;
+    min-width: 100px;
+    margin: 0 4px;
+    border-radius: 8px;
+    --background: transparent;
+    --inner-padding-end: 8px;
+    transition: background-color 0.2s ease;
+
+    &.selected {
+      --background: rgba(56, 128, 255, 0.1);
+    }
+
+    ion-label {
+      font-size: 13px;
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    ion-toggle {
+      --background: #e0e0e0;
+      --background-checked: #3880ff;
+      --handle-background: #ffffff;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
+.type-filter-segment {
+  // Colori base
+  --background: rgba(56, 128, 255, 0.08);  // Blu tenue (primary color di Ionic)
+  --indicator-color: #3880ff;  // Primary color di Ionic per l'indicatore
+
+  // Colori testo
+  --color: #565656;  // Grigio scuro per il testo non selezionato
+  --color-checked: #3880ff;  // Blu Ionic per il testo selezionato
+
+  // Stile generale
+  margin-top: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  // Stile per i segment button
+  ion-segment-button {
+    --border-radius: 0;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &::part(indicator) {
+      border-radius: 8px;
+    }
+  }
+}
+
+// Stile per il chip che appare dopo la selezione
 ion-chip {
-  margin-left: 8px;
+  --background: rgba(56, 128, 255, 0.15);
+  --color: #3880ff;
+  margin: 8px 0;
+  border: 1px solid rgba(56, 128, 255, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+
+  &:hover {
+    --background: rgba(56, 128, 255, 0.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 }

@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,
-		IonCardTitle, IonCardContent, IonItem, IonLabel, IonChip,
-		IonSegment, IonSegmentButton, IonIcon } from '@ionic/angular/standalone';
+	IonCardTitle, IonCardContent, IonItem, IonLabel, IonChip, IonToggle,
+	IonSegment, IonSegmentButton, IonIcon, IonCardSubtitle } from '@ionic/angular/standalone';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../models/transaction.model';
 import { Observable, map } from 'rxjs';
@@ -17,11 +17,10 @@ import { closeCircle } from 'ionicons/icons';
   styleUrls: ['./analytics.page.scss'],
   standalone: true,
   imports: [
-	CommonModule, FormsModule,
-	IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,
-	IonCardTitle, IonCardContent, IonLabel,
-	IonSegment, IonSegmentButton, IonChip,
-	IonIcon
+    CommonModule, FormsModule,
+    IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,
+    IonCardTitle, IonCardContent, IonLabel, IonToggle, IonItem, IonCardSubtitle,
+    IonSegment, IonSegmentButton, IonChip, IonIcon
   ]
 })
 export class AnalyticsPage implements OnInit, AfterViewInit {
@@ -112,7 +111,7 @@ export class AnalyticsPage implements OnInit, AfterViewInit {
 
 	typeFilterChanged(event: any) {
 		this.transactionTypeFilter = event.detail.value;
-		this.typeSelected = true;  // Imposta a true per nascondere il selettore
+		this.typeSelected = true;
 		this.updateAnalytics();
 	}
 
@@ -318,4 +317,26 @@ export class AnalyticsPage implements OnInit, AfterViewInit {
 	  }
 	});
   }
+
+  //switch beaviour methods
+  periodSwitchChanged(event: any, period: 'week' | 'month' | 'year') {
+	if (event.detail.checked) {
+	  // Disattiva gli altri periodi e imposta quello selezionato
+	  this.selectedPeriod = period;
+	  this.selectedPeriodSelected = true;
+	  this.updateAnalytics();
+	} 
+  }
+
+  typeSwitchChanged(event: any, type: 'all' | 'income' | 'expense') {
+    if (event.detail.checked) {
+      this.transactionTypeFilter = type;
+      this.typeSelected = true;
+      this.updateAnalytics();
+    } else if (this.transactionTypeFilter === type) {
+      // Non permettere di deselezionare l'opzione corrente
+      event.preventDefault();
+    }
+  }
+
 }

@@ -7,44 +7,66 @@
 <ion-content class="ion-padding">
   <!-- Selettore di periodo -->
   <ion-card>
+    <ion-card-header>
+      <ion-card-title>Periodo</ion-card-title>
+    </ion-card-header>
     <ion-card-content>
-      <ion-segment (ionChange)="periodChanged($event)" [value]="selectedPeriod">
-        <ion-segment-button value="week">
+      <!-- Selettore di periodo con switch eleganti -->
+      <div class="switch-container">
+        <ion-item lines="none" class="switch-item" [class.selected]="selectedPeriod === 'week'">
           <ion-label>Settimana</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="month">
-          <ion-label>Mese</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="year">
-          <ion-label>Anno</ion-label>
-        </ion-segment-button>
-      </ion-segment>
+          <ion-toggle
+            [checked]="selectedPeriod === 'week'"
+            (ionChange)="periodSwitchChanged($event, 'week')"
+            [disabled]="selectedPeriod === 'week'">
+          </ion-toggle>
+        </ion-item>
 
-      <div *ngIf="selectedPeriodSelected && !typeSelected" class="ion-text-center ion-padding-top">
-        <p>Seleziona un tipo di transazione da visualizzare</p>
+        <ion-item lines="none" class="switch-item" [class.selected]="selectedPeriod === 'month'">
+          <ion-label>Mese</ion-label>
+          <ion-toggle
+            [checked]="selectedPeriod === 'month'"
+            (ionChange)="periodSwitchChanged($event, 'month')"
+            [disabled]="selectedPeriod === 'month'">
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item lines="none" class="switch-item" [class.selected]="selectedPeriod === 'year'">
+          <ion-label>Anno</ion-label>
+          <ion-toggle
+            [checked]="selectedPeriod === 'year'"
+            (ionChange)="periodSwitchChanged($event, 'year')"
+            [disabled]="selectedPeriod === 'year'">
+          </ion-toggle>
+        </ion-item>
       </div>
+
+      <!-- Filtro tipo transazione con switch -->
+      <ion-card-subtitle *ngIf="selectedPeriodSelected" class="ion-padding-top">
+        Tipo di Transazione
+      </ion-card-subtitle>
 
       <ion-segment *ngIf="selectedPeriodSelected && !typeSelected"
       (ionChange)="typeFilterChanged($event)"
-      [value]="transactionTypeFilter || null"
+      [value]="transactionTypeFilter || 'all'"
       class="ion-margin-top type-filter-segment">
         <ion-segment-button value="all">
-          <ion-label>Tutte</ion-label>
+         <ion-label>Tutte</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="income">
-          <ion-label>Entrate</ion-label>
-        </ion-segment-button>
+          <ion-segment-button value="income">
+        <ion-label>Entrate</ion-label>
+         </ion-segment-button>
         <ion-segment-button value="expense">
-          <ion-label>Uscite</ion-label>
+         <ion-label>Uscite</ion-label>
         </ion-segment-button>
-    </ion-segment>
+      </ion-segment>
 
-      <!-- Visualizzazione compatta dopo la selezione del tipo -->
+      <!-- Chip per la selezione attiva -->
       <div *ngIf="selectedPeriodSelected && typeSelected" class="ion-padding-horizontal ion-margin-top">
-      <ion-chip color="primary" (click)="resetTypeFilter()">
-      <ion-label>{{ getTypeLabel() }}</ion-label>
-      <ion-icon name="close-circle"></ion-icon>
-      </ion-chip>
+        <ion-chip color="primary" (click)="resetTypeFilter()">
+          <ion-label>{{ getTypeLabel() }}</ion-label>
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-chip>
       </div>
     </ion-card-content>
   </ion-card>
