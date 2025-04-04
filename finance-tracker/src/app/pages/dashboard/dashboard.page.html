@@ -1,36 +1,69 @@
-<!-- filepath: /home/lnicoter/Projects/angular_stagista_lnicoter/finance-tracker/src/app/pages/dashboard/dashboard.page.html -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-title>Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card>
+  <!-- Saldo Card -->
+  <ion-card *ngIf="transactions$ | async as transactions">
     <ion-card-header>
-      <ion-card-title>Saldo attuale</ion-card-title>
+      <ion-card-title>Saldo Attuale</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <h1 *ngIf="(transactions$ | async) as transactions">
-        {{ calculateBalance(transactions) | currency:'EUR':'symbol':'1.2-2' }}
+      <h1 [ngClass]="calculateBalance(transactions) >= 0 ? 'positive' : 'negative'">
+        {{ calculateBalance(transactions) | currency:'EUR' }}
       </h1>
     </ion-card-content>
   </ion-card>
 
+  <!-- Transazioni Recenti Card -->
+  <ion-card *ngIf="transactions$ | async as transactions">
+    <ion-card-header>
+      <ion-card-title>Transazioni Recenti</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item *ngFor="let transaction of transactions.slice(0, 3)">
+          <ion-label>
+            <h2>{{ transaction.description }}</h2>
+            <p>{{ transaction.date | date:'dd/MM/yyyy' }}</p>
+          </ion-label>
+          <ion-badge slot="end" [color]="transaction.type === 'income' ? 'success' : 'danger'">
+            {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount | currency:'EUR' }}
+          </ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- JSONPlaceholder API Demo Card -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Transazioni recenti</ion-card-title>
+      <ion-card-title>Demo API Esterna</ion-card-title>
     </ion-card-header>
-    <ion-list *ngIf="(transactions$ | async) as transactions">
-      <ion-item *ngFor="let transaction of transactions.slice(-3).reverse()">
-        <ion-label>
-          <h2>{{ transaction.description }}</h2>
-          <p>{{ transaction.category }}</p>
-        </ion-label>
-        <ion-badge slot="end" [color]="transaction.type === 'income' ? 'success' : 'danger'">
-          {{ transaction.type === 'income' ? '+' : '-' }}{{ transaction.amount | currency:'EUR' }}
-        </ion-badge>
-      </ion-item>
-    </ion-list>
+    <ion-card-content>
+      <ion-button expand="block" (click)="loadPosts()" *ngIf="!showPosts">
+        Carica Post da JSONPlaceholder API
+      </ion-button>
+
+      <div *ngIf="isLoading" class="ion-text-center ion-padding">
+        <ion-spinner></ion-spinner>
+        <p>Caricamento post...</p>
+      </div>
+
+      <div *ngIf="errorMessage" class="ion-text-center ion-padding">
+        <p class="error-message">{{ errorMessage }}</p>
+      </div>
+
+      <ion-list *ngIf="posts.length > 0">
+        <ion-item *ngFor="let post of posts">
+          <ion-label>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.body }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 </ion-content>

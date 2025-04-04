@@ -1,0 +1,17 @@
+.positive {
+	color: var(--ion-color-success);
+  }
+
+  .negative {
+	color: var(--ion-color-danger);
+  }
+
+  h1 {
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+  }
+
+  .error-message {
+	color: var(--ion-color-danger);
+  }
